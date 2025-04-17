@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #cce7ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .dashboard-container {
+            width: 90%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .timesheet-form input, .timesheet-form select, .timesheet-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Employee Dashboard</h1>
+        <div class="grid-container">
+            <div class="card">
+                <h2>Timesheet Entry</h2>
+                <form class="timesheet-form" onsubmit="return submitTimesheet(event)">
+                    <input type="text" id="project" placeholder="Project Name" required>
+                    <input type="date" id="start-date" required>
+                    <input type="date" id="end-date" required>
+                    <input type="number" id="hours" placeholder="Hours Worked" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="card">
+                <h2>Performance Overview</h2>
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </div>
+        <div class="card table-container">
+            <h2>Timesheet Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Hours Worked</th>
+                    </tr>
+                </thead>
+                <tbody id="timesheet-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        function submitTimesheet(event) {
+            event.preventDefault();
+            let project = document.getElementById("project").value;
+            let startDate = document.getElementById("start-date").value;
+            let endDate = document.getElementById("end-date").value;
+            let hours = document.getElementById("hours").value;
+            let tbody = document.getElementById("timesheet-body");
+            let row = `<tr><td>${project}</td><td>${startDate}</td><td>${endDate}</td><td>${hours}</td></tr>`;
+            tbody.innerHTML += row;
+            updatePerformanceChart();
+        }
+
+        function updatePerformanceChart() {
+            var ctx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        data: [10, 20, 30, 40],
+                        backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545']
+                    }]
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+   background: url('../photo1.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensures the image covers the entire screen */
+    font-family: Arial, sans-serif; /* Optional styling */
+}

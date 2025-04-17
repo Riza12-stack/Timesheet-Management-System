@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #ecf0f1;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #34495e;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            transition: 0.3s;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+        }
+
+        .sidebar ul li:hover {
+            background: #1abc9c;
+            transform: scale(1.05);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        header h1 {
+            background: #1abc9c;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 220px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            background: #1abc9c;
+            color: white;
+            transform: translateY(-5px);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Manager Dashboard</h2>
+        <ul>
+            <li onclick="showAlert('Dashboard')"><a href="#">Dashboard</a></li>
+            <li onclick="showAlert('Employee Timesheets')"><a href="#">Employee Timesheets</a></li>
+            <li onclick="showAlert('Projects')"><a href="#">Projects</a></li>
+            <li onclick="showAlert('Reports')"><a href="#">Reports</a></li>
+            <li onclick="showAlert('Logout')"><a href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h1>Welcome, Manager</h1>
+        </header>
+
+        <section class="dashboard">
+            <div class="card" onclick="showAlert('Employee Timesheets')">
+                <h3>Employee Timesheets</h3>
+                <p>View and approve employee work hours.</p>
+            </div>
+            <a href="{{ url_for('project_dashboard') }}">
+             <div class="card">
+                <h3>Projects</h3>
+                <p>Manage ongoing projects and tasks.</p>
+            </div>
+        </a>
+         <a href="{{ url_for('report') }}">
+            <div class="card">
+                <h3>Reports</h3>
+                <p>Generate detailed work reports.</p>
+            </div>
+        </a>
+            <section class="dashboard">
+                
+                <a href="{{ url_for('add_employee') }}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <h3>Add Employee</h3>
+                        <p>Add new employees to the system.</p>
+                    </div>
+                </a>
+                
+                
+            </section>
+            
+        </section>
+    </div>
+
+    <script>
+        function showAlert(section) {
+            alert("Navigating to " + section);
+        }
+    </script>
+</body>
+</html>
